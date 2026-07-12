@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusFlow - O Aplikacji</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --dark-bg: #1f2937;
+            --light-bg: #f8fafc;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #1f2937;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            margin-top: 5px;
+        }
+
+        .close-button-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .close-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-button:hover {
+            background-color: #3730a3;
+        }
+    </style>
+</head>
+<body>
+    <div class="glass-card">
+        <h1><i class="fas fa-info-circle"></i> O Aplikacji FocusFlow</h1>
+        <p>FocusFlow to prosta, intuicyjna aplikacja zaprojektowana, aby pomóc Ci zwiększyć produktywność i poprawić koncentrację dzięki technice Pomodoro.</p>
+        <p>Naszym celem jest dostarczenie narzędzia, które będzie nie tylko funkcjonalne, ale także przyjemne w użyciu, wspierając Cię w codziennych wyzwaniach związanych z zarządzaniem czasem.</p>
+
+        <h3 class="section-title">Kluczowe funkcje:</h3>
+        <div class="feature-item">
+            <i class="fas fa-stopwatch"></i>
+            <div>
+                <strong>Timer Pomodoro:</strong> Ustawiaj elastyczne czasy pracy i przerw, aby dopasować je do swoich potrzeb. Śledź swoje cykle i zwiększaj efektywność.
+            </div>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-clipboard-list"></i>
+            <div>
+                <strong>Zarządzanie Zadaniami:</strong> Twórz, organizuj i priorytetyzuj swoje zadania. Oznaczaj ukończone pozycje, aby zobaczyć swoje postępy.
+            </div>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-book-open"></i>
+            <div>
+                <strong>Dziennik Produktywności:</strong> Zapisuj swoje myśli, refleksje i wyzwania. Analizuj, co działa, a co wymaga poprawy, aby ciągle się rozwijać.
+            </div>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-headphones-alt"></i>
+            <div>
+                <strong>Dźwięki Ambientowe:</strong> Wybieraj spośród relaksujących dźwięków tła, które pomogą Ci się skupić i zminimalizować rozpraszacze.
+            </div>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-chart-line"></i>
+            <div>
+                <strong>Statystyki i Dane:</strong> Śledź swoje osiągnięcia, takie jak liczba ukończonych cykli i zadań. Eksportuj i importuj dane, aby mieć je zawsze pod ręką.
+            </div>
+        </div>
+
+        <h3 class="section-title">Nasza Misja</h3>
+        <p>Wierzymy, że skuteczne zarządzanie czasem to klucz do osiągnięcia celów i zmniejszenia stresu. FocusFlow został stworzony, abyś mógł skupić się na tym, co najważniejsze i osiągnąć swoje maksymalne możliwości.</p>
+
+        <p>Dziękujemy, że wybrałeś FocusFlow!</p>
+		<p>Autor: MrPrompt</p>
+
+        <div class="close-button-container">
+            <button class="close-button" onclick="window.close()">Zamknij</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusFlow - Zwiększ swoją produktywność</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+	 <link rel="icon" type="image/png" href="fav.png">
+    <style>
+        /* styles.css */
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --dark-bg: #1f2937;
+            --light-bg: #f8fafc;
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #1f2937;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .timer-circle {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary-color) 0deg, #e5e7eb 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timer-inner {
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .timer-display {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .timer-label {
+            font-size: 1.1rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .btn-custom {
+            border-radius: 50px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s ease;
+            margin: 0.25rem;
+            min-width: 120px;
+        }
+
+        .btn-primary-custom {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary-custom:hover {
+            background: #3730a3;
+            transform: translateY(-2px);
+        }
+
+        .btn-success-custom {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-success-custom:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger-custom {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .btn-danger-custom:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        .todo-item {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .todo-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .todo-item.completed {
+            opacity: 0.7;
+            text-decoration: line-through;
+        }
+
+        .priority-high {
+            border-left-color: var(--danger-color);
+        }
+
+        .priority-medium {
+            border-left-color: var(--warning-color);
+        }
+
+        .priority-low {
+            border-left-color: var(--secondary-color);
+        }
+
+        .nav-tabs .nav-link {
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            border: none;
+            color: #6b7280;
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+        }
+
+        .nav-tabs .nav-link.active {
+            background: white;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .sound-control {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .volume-slider {
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, var(--primary-color), #6366f1);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .journal-entry {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .floating-action-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .floating-action-btn:hover {
+            transform: scale(1.1);
+            background: #3730a3;
+        }
+
+        @media (max-width: 768px) {
+            .timer-circle {
+                width: 240px;
+                height: 240px;
+            }
+
+            .timer-inner {
+                width: 200px;
+                height: 200px;
+            }
+
+            .timer-display {
+                font-size: 2.5rem;
+            }
+
+            .glass-card {
+                padding: 1.5rem;
+            }
+
+            .btn-custom {
+                min-width: 100px;
+                padding: 0.5rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .timer-circle {
+                width: 200px;
+                height: 200px;
+            }
+
+            .timer-inner {
+                width: 170px;
+                height: 170px;
+            }
+
+            .timer-display {
+                font-size: 2rem;
+            }
+
+            .glass-card {
+                padding: 1rem;
+            }
+        }
+
+        .notification-permission {
+            background: #fef3c7;
+            border: 1px solid #fbbf24;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .audio-loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .info-link {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .info-link:hover {
+            color: var(--secondary-color);
+        }
+        .close-button-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .close-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .close-button:hover {
+            background-color: #3730a3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center mb-4">
+                    <h1 class="text-white mb-2">
+                        <i class="fas fa-bullseye"></i> FocusFlow
+                    </h1>
+                    <p class="text-white-50">Zwiększ swoją produktywność z techniką Pomodoro</p>
+                    <div class="mt-3">
+                        <a href="pomoc.html" target="_blank" class="info-link">
+                            <i class="fas fa-question-circle"></i> Pomoc
+                        </a>
+                        <span class="text-white-50">|</span>
+                        <a href="o-aplikacji.html" target="_blank" class="info-link">
+                            <i class="fas fa-info-circle"></i> O Aplikacji
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="glass-card text-center">
+                    <h3 class="mb-4"><i class="fas fa-clock"></i> Timer Pomodoro</h3>
+                    
+                    <div class="timer-circle" id="timerCircle">
+                        <div class="timer-inner">
+                            <div class="timer-display" id="timerDisplay">25:00</div>
+                            <div class="timer-label" id="timerLabel">Praca</div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center flex-wrap">
+                        <button class="btn btn-success-custom btn-custom" id="startBtn">
+                            <i class="fas fa-play"></i> Start
+                        </button>
+                        <button class="btn btn-danger-custom btn-custom" id="pauseBtn">
+                            <i class="fas fa-pause"></i> Pauza
+                        </button>
+                        <button class="btn btn-primary-custom btn-custom" id="resetBtn">
+                            <i class="fas fa-refresh"></i> Reset
+                        </button>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="workTime" class="form-label">Praca (min)</label>
+                                <input type="number" class="form-control" id="workTime" value="25" min="1" max="60">
+                            </div>
+                            <div class="col-6">
+                                <label for="breakTime" class="form-label">Przerwa (min)</label>
+                                <input type="number" class="form-control" id="breakTime" value="5" min="1" max="30">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <small class="text-muted">
+                            Ukończone cykle: <strong id="completedCycles">0</strong>
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-md-6">
+                <div class="glass-card">
+                    <ul class="nav nav-tabs" id="mainTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="todo-tab" data-bs-toggle="tab" data-bs-target="#todo-pane" type="button" role="tab">
+                                <i class="fas fa-tasks"></i> Zadania
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="journal-tab" data-bs-toggle="tab" data-bs-target="#journal-pane" type="button" role="tab">
+                                <i class="fas fa-journal-whills"></i> Dziennik
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="sounds-tab" data-bs-toggle="tab" data-bs-target="#sounds-pane" type="button" role="tab">
+                                <i class="fas fa-volume-up"></i> Dźwięki
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="stats-tab" data-bs-toggle="tab" data-bs-target="#stats-pane" type="button" role="tab">
+                                <i class="fas fa-chart-bar"></i> Statystyki
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="mainTabsContent">
+                        <div class="tab-pane fade show active" id="todo-pane" role="tabpanel">
+                            <div class="mt-4">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" id="taskInput" placeholder="Dodaj nowe zadanie...">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select class="form-select" id="taskPriority">
+                                            <option value="low">Niski priorytet</option>
+                                            <option value="medium">Średni priorytet</option>
+                                            <option value="high">Wysoki priorytet</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-primary-custom w-100" id="addTaskBtn">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <button class="btn btn-outline-secondary btn-sm" id="sortTasksBtn">
+                                        <i class="fas fa-sort"></i> Sortuj wg priorytetu
+                                    </button>
+                                </div>
+
+                                <div id="taskList">
+                                    </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="journal-pane" role="tabpanel">
+                            <div class="mt-4">
+                                <div class="mb-3">
+                                    <h5>Dodaj wpis do dziennika</h5>
+                                    <textarea class="form-control" id="journalInput" rows="4" placeholder="Jak przebiegła sesja? Jakie były rozpraszacze? Jak oceniasz swoją efektywność?"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <button class="btn btn-primary-custom" id="addJournalBtn">
+                                        <i class="fas fa-plus"></i> Dodaj wpis
+                                    </button>
+                                </div>
+
+                                <div id="journalEntries">
+                                    </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="sounds-pane" role="tabpanel">
+                            <div class="mt-4">
+                                <h5 class="mb-3">Ambient Sounds</h5>
+                                <div id="soundControls">
+                                    </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="stats-pane" role="tabpanel">
+                            <div class="mt-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="stats-card">
+                                            <div class="stats-number" id="totalCycles">0</div>
+                                            <div>Ukończone cykle</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="stats-card">
+                                            <div class="stats-number" id="totalTasks">0</div>
+                                            <div>Wykonane zadania</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="stats-card">
+                                            <div class="stats-number" id="totalTime">0h</div>
+                                            <div>Łączny czas pracy</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4">
+                                    <h5>Zarządzanie danymi</h5>
+                                    <div class="d-flex gap-2 flex-wrap">
+                                        <button class="btn btn-outline-primary" id="exportBtn">
+                                            <i class="fas fa-download"></i> Eksportuj dane
+                                        </button>
+                                        <button class="btn btn-outline-secondary" id="importBtn">
+                                            <i class="fas fa-upload"></i> Importuj dane
+                                        </button>
+                                        <input type="file" id="importFile" accept=".json" style="display: none;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notificationAlert" class="notification-permission" style="display: none;">
+        <div class="d-flex align-items-center justify-content-between">
+            <div>
+                <i class="fas fa-bell"></i>
+                <strong>Włącz powiadomienia</strong> aby otrzymywać alerty o zakończonych cyklach
+            </div>
+            <button class="btn btn-sm btn-warning" id="enableNotifications">Włącz</button>
+        </div>
+    </div>
+
+    <footer class="text-white-50 text-center py-3 mt-4">
+        &copy; 2025 Copyright By <font color="#f80a2c">MrPrompt</font> All Rights Reserved
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // scripts/storage.js
+        const Storage = {
+            get: (key) => {
+                try {
+                    const data = localStorage.getItem(key);
+                    return data ? JSON.parse(data) : null;
+                } catch (e) {
+                    console.error('Error getting data from localStorage:', e);
+                    return null;
+                }
+            },
+
+            set: (key, value) => {
+                try {
+                    localStorage.setItem(key, JSON.stringify(value));
+                } catch (e) {
+                    console.error('Error setting data to localStorage:', e);
+                }
+            },
+
+            remove: (key) => {
+                try {
+                    localStorage.removeItem(key);
+                } catch (e) {
+                    console.error('Error removing data from localStorage:', e);
+                }
+            },
+
+            exportData: () => {
+                const data = {
+                    tasks: Storage.get('focusflow_tasks') || [],
+                    journal: Storage.get('focusflow_journal') || [],
+                    stats: Storage.get('focusflow_stats') || {},
+                    settings: Storage.get('focusflow_settings') || {},
+                    exportDate: new Date().toISOString()
+                };
+
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `focusflow_backup_${new Date().toISOString().split('T')[0]}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+            },
+
+            importData: (file) => {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        try {
+                            const data = JSON.parse(e.target.result);
+                            
+                            if (data.tasks) Storage.set('focusflow_tasks', data.tasks);
+                            if (data.journal) Storage.set('focusflow_journal', data.journal);
+                            if (data.stats) Storage.set('focusflow_stats', data.stats);
+                            if (data.settings) Storage.set('focusflow_settings', data.settings);
+                            
+                            resolve(data);
+                        } catch (error) {
+                            reject(error);
+                        }
+                    };
+                    reader.onerror = reject;
+                    reader.readAsText(file);
+                });
+            }
+        };
+
+        // scripts/notifications.js
+        const Notifications = {
+            permission: false,
+
+            init: () => {
+                if ('Notification' in window) {
+                    if (Notification.permission === 'granted') {
+                        Notifications.permission = true;
+                    } else if (Notification.permission !== 'denied') {
+                        document.getElementById('notificationAlert').style.display = 'block';
+                    }
+                }
+            },
+
+            requestPermission: () => {
+                if ('Notification' in window) {
+                    Notification.requestPermission().then(permission => {
+                        if (permission === 'granted') {
+                            Notifications.permission = true;
+                            document.getElementById('notificationAlert').style.display = 'none';
+                        }
+                    });
+                }
+            },
+
+            show: (title, body, icon = '🍅') => {
+                if (Notifications.permission && 'Notification' in window) {
+                    new Notification(title, {
+                        body: body,
+                        icon: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="0.9em" font-size="90">${icon}</text></svg>`
+                    });
+                }
+            }
+        };
+
+        // scripts/sound.js
+        const SoundManager = {
+            sounds: {
+                'rain': { name: 'Deszcz', url: 'sounds/deszcz.wav', audio: null, playing: false },
+                'waves': { name: 'Fale oceanu', url: 'sounds/fale.wav', audio: null, playing: false },
+                'cafe': { name: 'Kawiarnia', url: 'sounds/kawiarnia.mp3', audio: null, playing: false },
+                'forest': { name: 'Las', url: 'sounds/las.wav', audio: null, playing: false },
+                'fire': { name: 'Ogień', url: 'sounds/ogien.mp3', audio: null, playing: false }, // Nowy dźwięk
+                'wind': { name: 'Wiatr', url: 'sounds/wiatr.mp3', audio: null, playing: false }  // Nowy dźwięk
+            },
+
+            init: () => {
+                SoundManager.renderControls();
+            },
+
+            renderControls: () => {
+                const container = document.getElementById('soundControls');
+                container.innerHTML = '';
+
+                Object.entries(SoundManager.sounds).forEach(([key, sound]) => {
+                    const controlDiv = document.createElement('div');
+                    controlDiv.className = 'sound-control';
+                    controlDiv.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fas fa-music"></i>
+                                <strong>${sound.name}</strong>
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-outline-primary" onclick="SoundManager.toggle('${key}')">
+                                    <i class="fas ${sound.playing ? 'fa-pause' : 'fa-play'}" id="icon-${key}"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <input type="range" class="volume-slider" min="0" max="100" value="${sound.audio ? sound.audio.volume * 100 : 50}"
+                               onchange="SoundManager.setVolume('${key}', this.value)">
+                    `;
+                    container.appendChild(controlDiv);
+                });
+            },
+
+            toggle: (key) => {
+                const sound = SoundManager.sounds[key];
+                const icon = document.getElementById(`icon-${key}`);
+                
+                if (!sound.audio) {
+                    sound.audio = new Audio(sound.url);
+                    sound.audio.loop = true;
+                    sound.audio.volume = 0.5; // Domyślna głośność
+                    sound.audio.onplaying = () => { icon.className = 'fas fa-pause'; sound.playing = true; };
+                    sound.audio.onpause = () => { icon.className = 'fas fa-play'; sound.playing = false; };
+                    sound.audio.onerror = (e) => console.error(`Błąd ładowania dźwięku ${sound.name}:`, e);
+                }
+
+                if (sound.playing) {
+                    sound.audio.pause();
+                } else {
+                    sound.audio.play().catch(e => {
+                        console.error('Błąd odtwarzania dźwięku:', e);
+                        alert('Przeglądarka może wymagać interakcji użytkownika do odtworzenia dźwięku.');
+                    });
+                }
+            },
+
+            setVolume: (key, value) => {
+                const sound = SoundManager.sounds[key];
+                if (sound.audio) {
+                    sound.audio.volume = value / 100;
+                }
+            },
+
+            playNotificationSound: () => {
+                const audio = new Audio('sounds/ding.mp3'); // Upewnij się, że masz plik ding.mp3
+                audio.play().catch(e => console.error('Błąd odtwarzania dźwięku powiadomienia:', e));
+            }
+        };
+
+        // scripts/timer.js
+        const Timer = {
+            timeLeft: 25 * 60,
+            isRunning: false,
+            isWorkTime: true,
+            interval: null,
+            workTime: 25,
+            breakTime: 5,
+            cycles: 0,
+
+            init: () => {
+                Timer.updateDisplay();
+                Timer.bindEvents();
+                Timer.loadSettings();
+            },
+
+            bindEvents: () => {
+                document.getElementById('startBtn').addEventListener('click', Timer.start);
+                document.getElementById('pauseBtn').addEventListener('click', Timer.pause);
+                document.getElementById('resetBtn').addEventListener('click', Timer.reset);
+                document.getElementById('workTime').addEventListener('change', Timer.updateSettings);
+                document.getElementById('breakTime').addEventListener('change', Timer.updateSettings);
+            },
+
+            start: () => {
+                Timer.isRunning = true;
+                Timer.interval = setInterval(Timer.tick, 1000);
+                document.getElementById('timerCircle').classList.add('pulse');
+            },
+
+            pause: () => {
+                Timer.isRunning = false;
+                clearInterval(Timer.interval);
+                document.getElementById('timerCircle').classList.remove('pulse');
+            },
+
+            reset: () => {
+                Timer.pause();
+                Timer.timeLeft = Timer.isWorkTime ? Timer.workTime * 60 : Timer.breakTime * 60;
+                Timer.updateDisplay();
+                Timer.updateCircle();
+            },
+
+            tick: () => {
+                Timer.timeLeft--;
+                Timer.updateDisplay();
+                Timer.updateCircle();
+
+                if (Timer.timeLeft <= 0) {
+                    Timer.complete();
+                }
+            },
+
+            complete: () => {
+                Timer.pause();
+                SoundManager.playNotificationSound();
+
+                if (Timer.isWorkTime) {
+                    Timer.cycles++;
+                    document.getElementById('completedCycles').textContent = Timer.cycles;
+                    Stats.updateStats('cycles', Timer.cycles);
+                    
+                    Notifications.show(
+                        'Czas pracy zakończony!',
+                        'Czas na zasłużoną przerwę. Dobra robota!',
+                        '🎉'
+                    );
+                    
+                    Timer.isWorkTime = false;
+                    Timer.timeLeft = Timer.breakTime * 60;
+                } else {
+                    Notifications.show(
+                        'Przerwa zakończona!',
+                        'Czas wrócić do pracy. Powodzenia!',
+                        '💪'
+                    );
+                    
+                    Timer.isWorkTime = true;
+                    Timer.timeLeft = Timer.workTime * 60;
+                }
+
+                Timer.updateDisplay();
+                Timer.updateCircle();
+            },
+
+            updateDisplay: () => {
+                const minutes = Math.floor(Timer.timeLeft / 60);
+                const seconds = Timer.timeLeft % 60;
+                document.getElementById('timerDisplay').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                document.getElementById('timerLabel').textContent = Timer.isWorkTime ? 'Praca' : 'Przerwa';
+            },
+
+            updateCircle: () => {
+                const totalTime = Timer.isWorkTime ? Timer.workTime * 60 : Timer.breakTime * 60;
+                const progress = (totalTime - Timer.timeLeft) / totalTime;
+                const degrees = progress * 360;
+                
+                const circle = document.getElementById('timerCircle');
+                circle.style.background = `conic-gradient(var(--primary-color) ${degrees}deg, #e5e7eb ${degrees}deg)`;
+            },
+
+            updateSettings: () => {
+                Timer.workTime = parseInt(document.getElementById('workTime').value);
+                Timer.breakTime = parseInt(document.getElementById('breakTime').value);
+                
+                if (!Timer.isRunning) {
+                    Timer.timeLeft = Timer.isWorkTime ? Timer.workTime * 60 : Timer.breakTime * 60;
+                    Timer.updateDisplay();
+                    Timer.updateCircle();
+                }
+                
+                Timer.saveSettings();
+            },
+
+            saveSettings: () => {
+                Storage.set('focusflow_timer_settings', {
+                    workTime: Timer.workTime,
+                    breakTime: Timer.breakTime
+                });
+            },
+
+            loadSettings: () => {
+                const settings = Storage.get('focusflow_timer_settings');
+                if (settings) {
+                    Timer.workTime = settings.workTime || 25;
+                    Timer.breakTime = settings.breakTime || 5;
+                    document.getElementById('workTime').value = Timer.workTime;
+                    document.getElementById('breakTime').value = Timer.breakTime;
+                    Timer.timeLeft = Timer.workTime * 60;
+                    Timer.updateDisplay();
+                    Timer.updateCircle();
+                }
+            }
+        };
+
+        // scripts/todo.js
+        const TodoManager = {
+            tasks: [],
+
+            init: () => {
+                TodoManager.loadTasks();
+                TodoManager.bindEvents();
+                TodoManager.render();
+            },
+
+            bindEvents: () => {
+                document.getElementById('addTaskBtn').addEventListener('click', TodoManager.addTask);
+                document.getElementById('taskInput').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') TodoManager.addTask();
+                });
+                document.getElementById('sortTasksBtn').addEventListener('click', TodoManager.sortTasks);
+            },
+
+            addTask: () => {
+                const input = document.getElementById('taskInput');
+                const priority = document.getElementById('taskPriority').value;
+                const text = input.value.trim();
+
+                if (text) {
+                    const task = {
+                        id: Date.now(),
+                        text: text,
+                        priority: priority,
+                        completed: false,
+                        createdAt: new Date().toISOString()
+                    };
+
+                    TodoManager.tasks.push(task);
+                    input.value = '';
+                    TodoManager.saveTasks();
+                    TodoManager.render();
+                }
+            },
+
+            toggleTask: (id) => {
+                const task = TodoManager.tasks.find(t => t.id === id);
+                if (task) {
+                    task.completed = !task.completed;
+                    if (task.completed) {
+                        Stats.updateStats('tasks', Stats.getStats().tasks + 1);
+                    }
+                    TodoManager.saveTasks();
+                    TodoManager.render();
+                }
+            },
+
+            deleteTask: (id) => {
+                TodoManager.tasks = TodoManager.tasks.filter(t => t.id !== id);
+                TodoManager.saveTasks();
+                TodoManager.render();
+            },
+
+            editTask: (id) => {
+                const task = TodoManager.tasks.find(t => t.id === id);
+                if (task) {
+                    const newText = prompt('Edytuj zadanie:', task.text);
+                    if (newText && newText.trim()) {
+                        task.text = newText.trim();
+                        TodoManager.saveTasks();
+                        TodoManager.render();
+                    }
+                }
+            },
+
+            sortTasks: () => {
+                const priorityOrder = { high: 3, medium: 2, low: 1 };
+                TodoManager.tasks.sort((a, b) => {
+                    if (a.completed !== b.completed) {
+                        return a.completed ? 1 : -1;
+                    }
+                    return priorityOrder[b.priority] - priorityOrder[a.priority];
+                });
+                TodoManager.render();
+            },
+
+            render: () => {
+                const container = document.getElementById('taskList');
+                container.innerHTML = '';
+
+                if (TodoManager.tasks.length === 0) {
+                    container.innerHTML = '<p class="text-muted text-center">Brak zadań. Dodaj pierwsze zadanie!</p>';
+                    return;
+                }
+
+                TodoManager.tasks.forEach(task => {
+                    const taskElement = document.createElement('div');
+                    taskElement.className = `todo-item priority-${task.priority} ${task.completed ? 'completed' : ''}`;
+                    taskElement.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center flex-grow-1">
+                                <input type="checkbox" class="form-check-input me-2" 
+                                       ${task.completed ? 'checked' : ''} 
+                                       onchange="TodoManager.toggleTask(${task.id})">
+                                <span class="task-text">${task.text}</span>
+                            </div>
+                            <div class="task-actions">
+                                <button class="btn btn-sm btn-outline-primary me-1" 
+                                        onclick="TodoManager.editTask(${task.id})">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" 
+                                        onclick="TodoManager.deleteTask(${task.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <small class="text-muted">
+                            <i class="fas fa-flag"></i> ${task.priority === 'high' ? 'Wysoki' : task.priority === 'medium' ? 'Średni' : 'Niski'} priorytet
+                        </small>
+                    `;
+                    container.appendChild(taskElement);
+                });
+            },
+
+            saveTasks: () => {
+                Storage.set('focusflow_tasks', TodoManager.tasks);
+            },
+
+            loadTasks: () => {
+                TodoManager.tasks = Storage.get('focusflow_tasks') || [];
+            }
+        };
+
+        // scripts/journal.js
+        const JournalManager = {
+            entries: [],
+
+            init: () => {
+                JournalManager.loadEntries();
+                JournalManager.bindEvents();
+                JournalManager.render();
+            },
+
+            bindEvents: () => {
+                document.getElementById('addJournalBtn').addEventListener('click', JournalManager.addEntry);
+            },
+
+            addEntry: () => {
+                const input = document.getElementById('journalInput');
+                const text = input.value.trim();
+
+                if (text) {
+                    const entry = {
+                        id: Date.now(),
+                        text: text,
+                        date: new Date().toISOString(),
+                        formattedDate: new Date().toLocaleDateString('pl-PL', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        })
+                    };
+
+                    JournalManager.entries.unshift(entry);
+                    input.value = '';
+                    JournalManager.saveEntries();
+                    JournalManager.render();
+                }
+            },
+
+            deleteEntry: (id) => {
+                if (confirm('Czy na pewno chcesz usunąć ten wpis?')) {
+                    JournalManager.entries = JournalManager.entries.filter(e => e.id !== id);
+                    JournalManager.saveEntries();
+                    JournalManager.render();
+                }
+            },
+
+            render: () => {
+                const container = document.getElementById('journalEntries');
+                container.innerHTML = '';
+
+                if (JournalManager.entries.length === 0) {
+                    container.innerHTML = '<p class="text-muted text-center">Brak wpisów w dzienniku. Dodaj pierwszy wpis!</p>';
+                    return;
+                }
+
+                JournalManager.entries.forEach(entry => {
+                    const entryElement = document.createElement('div');
+                    entryElement.className = 'journal-entry fade-in';
+                    entryElement.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h6 class="mb-0">
+                                <i class="fas fa-calendar-alt"></i> ${entry.formattedDate}
+                            </h6>
+                            <button class="btn btn-sm btn-outline-danger" 
+                                    onclick="JournalManager.deleteEntry(${entry.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <p class="mb-0">${entry.text}</p>
+                    `;
+                    container.appendChild(entryElement);
+                });
+            },
+
+            saveEntries: () => {
+                Storage.set('focusflow_journal', JournalManager.entries);
+            },
+
+            loadEntries: () => {
+                JournalManager.entries = Storage.get('focusflow_journal') || [];
+            }
+        };
+
+        // Statystyki
+        const Stats = {
+            init: () => {
+                Stats.updateDisplay();
+                Stats.bindEvents();
+            },
+
+            bindEvents: () => {
+                document.getElementById('exportBtn').addEventListener('click', Storage.exportData);
+                document.getElementById('importBtn').addEventListener('click', () => {
+                    document.getElementById('importFile').click();
+                });
+                document.getElementById('importFile').addEventListener('change', Stats.handleImport);
+            },
+
+            handleImport: (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    Storage.importData(file)
+                        .then(data => {
+                            alert('Dane zostały pomyślnie zaimportowane!');
+                            location.reload();
+                        })
+                        .catch(error => {
+                            alert('Błąd podczas importu danych: ' + error.message);
+                        });
+                }
+            },
+
+            getStats: () => {
+                return Storage.get('focusflow_stats') || {
+                    cycles: 0,
+                    tasks: 0,
+                    totalTime: 0
+                };
+            },
+
+            updateStats: (key, value) => {
+                const stats = Stats.getStats();
+                stats[key] = value;
+                Storage.set('focusflow_stats', stats);
+                Stats.updateDisplay();
+            },
+
+            updateDisplay: () => {
+                const stats = Stats.getStats();
+                document.getElementById('totalCycles').textContent = stats.cycles || 0;
+                document.getElementById('totalTasks').textContent = stats.tasks || 0;
+                document.getElementById('totalTime').textContent = `${Math.floor((stats.totalTime || 0) / 60)}h`;
+            }
+        };
+
+        // Inicjalizacja aplikacji
+        document.addEventListener('DOMContentLoaded', () => {
+            Timer.init();
+            TodoManager.init();
+            JournalManager.init();
+            SoundManager.init();
+            Stats.init();
+            Notifications.init();
+
+            // Obsługa przycisków powiadomień
+            document.getElementById('enableNotifications').addEventListener('click', () => {
+                Notifications.requestPermission();
+            });
+
+            // Aktualizacja statystyk cykli
+            const savedCycles = Stats.getStats().cycles || 0;
+            document.getElementById('completedCycles').textContent = savedCycles;
+            Timer.cycles = savedCycles;
+
+            console.log('🎯 FocusFlow załadowany pomyślnie!');
+        });
+    </script>
+</body>
+</html>

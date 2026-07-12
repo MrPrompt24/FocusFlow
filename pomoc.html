@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusFlow - Pomoc</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --dark-bg: #1f2937;
+            --light-bg: #f8fafc;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #1f2937;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1, h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            color: #374151;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+
+        .close-button-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .close-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-button:hover {
+            background-color: #3730a3;
+        }
+    </style>
+</head>
+<body>
+    <div class="glass-card">
+        <h1><i class="fas fa-question-circle"></i> Pomoc FocusFlow</h1>
+        <p>Witaj w sekcji pomocy FocusFlow! Poniżej znajdziesz odpowiedzi na najczęściej zadawane pytania oraz wskazówki dotyczące korzystania z aplikacji.</p>
+
+        <h3 class="section-title">Czym jest technika Pomodoro?</h3>
+        <p>Technika Pomodoro to metoda zarządzania czasem, która polega na podziale pracy na interwały, zazwyczaj 25-minutowe, rozdzielone krótkimi przerwami. Nazwa pochodzi od kuchennego minutnika w kształcie pomidora, którego używał twórca tej metody.</p>
+        <ul>
+            <li>25 minut pracy: Skoncentruj się na jednym zadaniu bez rozpraszaczy.</li>
+            <li>5 minut przerwy: Odpocznij, odejdź od biurka, zrób coś relaksującego.</li>
+            <li>Długa przerwa: Po 4 cyklach pracy (Pomodoro) zrób dłuższą przerwę (15-30 minut).</li>
+        </ul>
+
+        <h3 class="section-title">Jak używać Timera Pomodoro?</h3>
+        <p>Na panelu głównym znajdziesz timer. Ustaw czas pracy i czas przerwy, a następnie kliknij "Start" aby rozpocząć odliczanie. W trakcie cyklu możesz użyć "Pauzy" lub "Resetu".</p>
+
+        <h3 class="section-title">Jak zarządzać zadaniami?</h3>
+        <p>Przejdź do zakładki "Zadania". Możesz dodawać nowe zadania, ustawiać ich priorytet (niski, średni, wysoki), oznaczać jako ukończone oraz edytować lub usuwać. Zadania można również sortować według priorytetu.</p>
+
+        <h3 class="section-title">Do czego służy Dziennik?</h3>
+        <p>W zakładce "Dziennik" możesz zapisywać swoje spostrzeżenia po sesjach pracy, notować rozpraszacze, oceniać swoją efektywność i śledzić postępy. To doskonałe narzędzie do refleksji i poprawy produktywności.</p>
+
+        <h3 class="section-title">Co to są Dźwięki Ambientowe?</h3>
+        <p>Sekcja "Dźwięki" pozwala na odtwarzanie relaksujących dźwięków tła, takich jak deszcz, fale, czy odgłosy kawiarni. Pomagają one w skupieniu i minimalizowaniu rozpraszaczy. Możesz regulować głośność każdego dźwięku.</p>
+
+        <h3 class="section-title">Gdzie znajdę Statystyki?</h3>
+        <p>W zakładce "Statystyki" możesz śledzić swoje postępy: liczbę ukończonych cykli Pomodoro, wykonanych zadań oraz łączny czas pracy. Możesz również eksportować i importować swoje dane, aby je zabezpieczyć.</p>
+
+        <h3 class="section-title">Powiadomienia przeglądarki</h3>
+        <p>Aby otrzymywać powiadomienia o zakończeniu cykli pracy lub przerw, zezwól FocusFlow na wysyłanie powiadomień w swojej przeglądarce. Jeśli pojawi się alert o powiadomieniach, kliknij "Włącz".</p>
+
+        <div class="close-button-container">
+            <button class="close-button" onclick="window.close()">Zamknij</button>
+        </div>
+    </div>
+</body>
+</html>
